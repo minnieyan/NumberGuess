@@ -5,7 +5,7 @@
 int main(void) {
     int myNum, userGuess, attempts; 
     
-    srand(time(NULL)); //Random number between 1-10 is generated and stored.
+    srand(time(NULL)); //Random number between 1-10 is generated and stored
     myNum = rand() % 10 + 1;
 
     printf("How many attempts would you like?\n"); //Prompts and stores how many attempts the user would like to have.
