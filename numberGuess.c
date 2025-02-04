@@ -3,29 +3,39 @@
 #include <stdlib.h>
 
 int main(void) {
-    int myNum, userGuess, attempts; 
+    int myNum, userGuess, attempts, infiniteAttempts = 0; 
     
-    srand(time(NULL)); //Random number between 1-10 is generated and stored.
+    srand(time(NULL));
     myNum = rand() % 10 + 1;
 
-    printf("How many attempts would you like?\n"); //Prompts and stores how many attempts the user would like to have.
+    printf("How many attempts would you like? (Enter 0 for Infinite): ");
     scanf("%d", &attempts);
+    if (attempts == 0) {
+        infiniteAttempts = 1;
+    }
 
-    while(attempts > 0) {
-        printf("Guess a number between 1-10: "); //If attempts still remain, prompts the user to give their guess, congratulates them upon a successful guess.
+    while(attempts > 0 || infiniteAttempts == 1) {
+        printf("Guess a number between 1-10: ");
         scanf("%d", &userGuess);
         if(userGuess == myNum) {
             printf("Congratulations, you got it right!\n"); 
             break;
-            
         } else if(userGuess > myNum) {
-            printf("Wrong, too high! Attempts remaining: %d\n", --attempts); //Informs the user if their guess is too low or too high and deducts an attempt.
+            printf("Wrong, too high! ");
         } else {
-            printf("Wrong, too low! Attempts remaining: %d\n", --attempts);
+            printf("Wrong, too low! ");
+        }
+        if (infiniteAttempts == 0) {
+            attempts--;
+        }
+        if (infiniteAttempts == 0) {
+            printf("Attempts remaining: %d\n", attempts);
+        } else {
+            printf("\n");
         }
 
-    } if (attempts == 0) {
-        printf("Out of attempts! The number was %d!\n", myNum); //If out of attempts, reject further attempts, and return hidden number.
+    } if (attempts == 0 && infiniteAttempts == 0) {
+        printf("Out of attempts! The number was %d!\n", myNum);
     }
     
     return 0;
